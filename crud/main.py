@@ -10,14 +10,14 @@ class App():
 
     def consultar(self, id: int = None):
         if id == None:
-            id = int(input('Digite o código:'))
+            id = int(input('Digite o cÃ³digo:'))
         cursor = self.base.consultar(id)
         for record in cursor:
             print(record)
             return record[0]
         else:
-            print(f'Registro <{id}>  não encontrado ou excluído.')    
-            return None
+            print(f'Registro {id} não encontrado ou excluído.')
+        return None
     
     def getInputs(self):
         return self.base.getInputs()
@@ -55,20 +55,19 @@ class App():
                 print('Opção inválida')        
             if opt in [1,2]:   
                 opt = int(input('Opções: <1> Inserir <2> Atualizar <3> Excluir <4> Consultar <5> Sair: '))
-                match opt:
-                    case 5:
+                if opt == 5:
                         break
-                    case 1:
+                elif opt == 1:
                         id = self.inserir()
                         print(f'Id inserido: {id}')
-                    case 2:
+                elif opt == 2:
                         id = self.atualizar()  
-                    case 3:
+                elif opt == 3:
                         id = self.excluir()
                         self.consultar(id)
-                    case 4: 
+                elif opt == 4: 
                         self.consultar()   
-                    case _:
+                else:
                         print('Opção não encontrada.')
 
 
@@ -77,4 +76,3 @@ if __name__ == '__main__':
     app.run()
 
 
-    

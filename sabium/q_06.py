@@ -7,11 +7,9 @@ class Empregado:
 
     def __init__(self, nome:str, salario:float):
         self.nome = nome
-        if salario > 0:
-           self.salario = salario
-        else:
-            self.salario = 0
+        self.salario = salario if salario > 0 else 0
 
+        
     def aumenta_salario(self, percentual_aumento: float):
         self.salario = self.salario + self.salario * (percentual_aumento /100)
 

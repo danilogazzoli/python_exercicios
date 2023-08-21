@@ -11,11 +11,7 @@ def count_numero_primo(numero: int):
     return cont
 
 def is_numero_primo(numero: int):
-    count = count_numero_primo(numero)
-    if count == 2:
-        return True
-    else:
-        return False
+    return count_numero_primo(numero) == 2
 
 if __name__ == '__main__':
     numero = int(input('Entre com o número:'))

@@ -17,32 +17,57 @@ class Jogo_da_Velha:
         return [row[column_index] for row in matrix]
 
 
-    def check_jogo_terminado(self):
 
-        # checa as linhas:
+    def check_diagonais(self):
+        # checa as diagonais:
+        diagonal1 = []
+        diagonal2 = []
+        diag_int1 = 0
+        diag_int2 = 2
         for i in range(0, len(self.tabuleiro)):
-            linha = self.tabuleiro[i]
-            if linha[0] != None and linha.count(linha[0]) == len(linha):
-                self.vencedor = linha[0]
-                return True
+            diagonal1.append(self.tabuleiro[i][diag_int1])
+            diagonal2.append(self.tabuleiro[i][diag_int2])
+            diag_int1 += 1
+            diag_int2 -= 1   
 
+        if diagonal1[0] != None and diagonal1.count(diagonal1[0]) == len(diagonal1):
+            self.vencedor = diagonal1[0]
+            return True
+        if diagonal2[0] != None and diagonal2.count(diagonal2[0]) == len(diagonal2):
+            self.vencedor = diagonal2[0]
+            return True
+
+        return False
+    
+    def check_columns(self):
         # checa as colunas:
         for i in range(0, len(self.tabuleiro)):
             columns = self.get_column(self.tabuleiro, i)
             if columns[0] != None and columns.count(columns[0]) == len(columns):
                 self.vencedor = columns[0]
                 return True
-
-        # checa as diagonais:
-        diagonal = []
-        diagonal_int = 0
+        return False        
+            
+    def check_linhas(self):
+        # checa as linhas:
         for i in range(0, len(self.tabuleiro)):
-            diagonal.append(self.tabuleiro[i][diagonal_int])
-            diagonal_int += 1   
+            linha = self.tabuleiro[i]
+            if linha[0] != None and linha.count(linha[0]) == len(linha):
+                self.vencedor = linha[0]
+                return True
+        return False
+                
+    def check_jogo_terminado(self):
 
-        if diagonal[0] != None and diagonal.count(diagonal[0]) == len(diagonal):
-            self.vencedor = diagonal[0]
+        if self.check_linhas():
             return True
+            
+        if self.check_columns():
+            return True
+
+        if self.check_diagonais():
+            return True
+ 
         return False
 
    
