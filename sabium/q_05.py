@@ -1,5 +1,19 @@
 # encoding: utf_8
 
+from collections import deque
+
+def is_palindromo_deque(palavra:str):
+    chardeque = deque(palavra)
+    #for letra in palavra:
+    #    chardeque.append(letra)
+    stillequal = True
+
+    while len(chardeque) > 1 and stillequal:
+        primeira = chardeque.popleft()
+        ultima = chardeque.pop()
+        stillequal = primeira == ultima
+    return stillequal
+
 def is_palindromo(palavra: str):
     reversed = palavra[::-1]
     return reversed.upper() == palavra.upper()

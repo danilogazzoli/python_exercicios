@@ -33,9 +33,30 @@ def binary_search(arr, low, high, x):
 		# Element is not present in the array
 		return -1
 
+def binary_search2(vetor, item):
+	found = False
+	last = len(vetor) -1
+	first = 0
+	while not found and first <= last:
+		mid = (first + last) // 2
+		if vetor[mid] == item:
+			found = True
+		elif item > vetor[mid]:
+			first = mid + 1
+		elif item < vetor[mid]:
+			last = mid - 1
+	return found, mid            
+			
+
+
 # Test array
 arr = [ 2, 3, 4, 10, 40 ]
 x = 10
+
+found, index = binary_search2(arr, x)
+
+if found:
+	print(index)
 
 # Function call
 result = binary_search(arr, 0, len(arr)-1, x)
