@@ -10,6 +10,12 @@
 
 # 💡 Em um Binary Search Tree (BST), o percorrimento em ordem retorna os valores ordenados automaticamente.
 
+# Pre-order: Good for copying a tree or creating a prefix expression.
+
+# In-order: Good for getting sorted data from a BST.
+
+# Post-order: Good for deleting a tree or generating postfix expressions.
+
 class Node:
     def __init__(self, value):
         self.value = value
