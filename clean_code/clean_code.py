@@ -62,8 +62,11 @@ exibir_resultado("Média (bom)", media)
 # --- Exemplo 3: Tratamento de Erros ---
 print("\n--- Exemplo 3: Tratamento de Erros ---")
 
-# Bad Practice: Retornar tipos mistos (número ou string/None)
+# Bad Practice: Retornar tipos mistos (número ou string/None) ou nao tratar o código
 def dividir_ruim(x, y):
+    return x / y
+
+def dividir_ruim2(x, y):
     try:
         return x / y
     except ZeroDivisionError:
@@ -76,14 +79,24 @@ def dividir_bom(x, y):
     try:
         return x / y
     except ZeroDivisionError as e:
-        # Levanta uma exceção semântica, preservando a original
+        # Levanta uma exceção semântica para um erro de valor.
         raise ValueError("O denominador não pode ser zero.") from e
+    except TypeError:
+        # Levanta uma exceção semântica para um erro de tipo.
+        raise TypeError("Ambos os operandos devem ser números.")
 
 # Uso da boa prática:
+print("Testando divisão por zero:")
 try:
-    resultado = dividir_bom(10, 0)
+    dividir_bom(10, 0)
 except ValueError as e:
-    print(f"Erro capturado (bom): {e}")
+    print(f"-> Erro capturado (bom): {e}")
+
+print("\nTestando divisão com tipo inválido:")
+try:
+    dividir_bom(10, "a")
+except TypeError as e:
+    print(f"-> Erro capturado (bom): {e}")
 
 
 # --- Exemplo 4: Evitar Duplicação de Código (DRY - Don't Repeat Yourself) ---
