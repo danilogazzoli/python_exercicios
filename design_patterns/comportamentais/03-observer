@@ -1,0 +1,34 @@
+# Observador
+class Observador:
+    def atualizar(self, temperatura):
+        pass
+# Sujeito
+class Termometro:
+    def __init__(self):
+        self.temperatura = 0
+        self.observadores = []
+    def adicionar_observador(self, observador):
+        self.observadores.append(observador)
+    def remover_observador(self, observador):
+        self.observadores.remove(observador)
+    def notificar_observadores(self):
+        for observador in self.observadores:
+            observador.atualizar(self.temperatura)
+    def set_temperatura(self, temperatura):
+        self.temperatura = temperatura
+        self.notificar_observadores()
+# Observadores concretos
+class Display(Observador):
+    def atualizar(self, temperatura):
+        print(f"Temperatura atual: {temperatura}°C")
+class Alarme(Observador):
+    def atualizar(self, temperatura):
+        if temperatura > 30:
+            print("Alerta! Temperatura alta!")
+# Uso do Observer
+termometro = Termometro()
+display = Display()
+alarme = Alarme()
+termometro.adicionar_observador(display)
+termometro.adicionar_observador(alarme)
+termometro.set_temperatura(32)  # Saída: Temperatura atual: 32°C \n Alerta! Temperatura alta!
